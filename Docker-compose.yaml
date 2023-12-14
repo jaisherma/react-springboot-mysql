@@ -1,0 +1,25 @@
+services:
+    webapp:
+       build:
+         context: .
+       environment:
+         - SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/learncrud
+         - SPRING_DATASOURCE_USERNAME: root
+         - SPRING_DATASOURCE_PASSWORD: root
+       ports:
+         - 8085:8080
+       links: 
+         - db
+     db:
+       image: mysql:8
+       environment:
+         - MYSQL_DATABASE: learncrud
+         - MYSQL_USER: root
+         - MYSQL_PASSWORD: root
+         - MYSQL_ROOT_PASSWORD: root
+       port:
+         - 3306:3306
+       volumes:
+         - mysql:/var/lib/mysql
+volumes:
+    mysql:
